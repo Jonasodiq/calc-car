@@ -56,5 +56,17 @@ $(document).ready(function() {
         modelPriceHolder.text('SEK: ' + addSpace(modelPrice)); 
     }
     
+    // Funktion to complete specifications based on selected options
+    function completeSpecs() {
+        var motorText = $('input[name=engine]:checked + label', '#autoForm').text() || '';
+        var transText = $('input[name=transmission]:checked + label', '#autoForm').text() || '';
+        var packageText = $('input[name=package]:checked + label', '#autoForm').text() || '';
+
+        modelSpecs = motorText;
+        modelSpecs += motorText && transText ? ', ' + transText : transText;
+        modelSpecs += motorText || transText ? ' ' + packageText : packageText;
+        modelSpecsHolder.text(modelSpecs);
+    }
+    
 });
   
