@@ -48,3 +48,15 @@ h2 {
     padding: 0;
     margin: 0;
 }
+
+.venue {
+    position: absolute;
+    font-size: clamp(5rem, 18vw, 20rem);
+    z-index: -9;
+    color:#88fffb30;
+    top: 80px;
+}
+
+img {
+    width: 80%;
+}
