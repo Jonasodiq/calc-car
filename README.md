@@ -1,8 +1,5 @@
 # Calc-car
 
-# Develop
-
-
 
 ![TodoApp](https://github.com/Jonasodiq/calc-car/blob/main/img/car-venue.jpg)
 
