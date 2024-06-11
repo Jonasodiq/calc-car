@@ -4,7 +4,7 @@
 
 
 
-![TodoApp](https://github.com/Jonasodiq/TodoApp/blob/main/TodoApp.jpeg)
+![TodoApp](https://github.com/Jonasodiq/calc-car/blob/main/img/car-venue.jpg)
 
 ## App Description:
 
