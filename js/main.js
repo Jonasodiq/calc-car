@@ -10,7 +10,14 @@ $(document).ready(function() {
         modelSpecsHolder,
         modelPriceHolder,
         modelPriceUSDHolder;
-  
+    
+    // Get HTML elements
+    modelSpecsHolder = $('#modelSpecs');
+    modelPriceHolder = $('#modelPrice');
+    modelPriceUSDHolder = $('#modelPriceUSD');
+
+    modelSpecs = '';
+    modelPrice = 0;
     
 });
   
