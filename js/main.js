@@ -4,36 +4,27 @@
 // Calc-Car
 
 $(document).ready(function() {
+
     // Variables
-    let modelSpecs,
-        modelPrice,
-        modelSpecsHolder,
-        modelPriceHolder,
-        modelPriceUSDHolder;
+    let modelSpecs = '';
+    let modelPrice = 0;
+    let sekUsdRate = 0;
     
     // Get HTML elements
-    modelSpecsHolder = $('#modelSpecs');
-    modelPriceHolder = $('#modelPrice');
-    modelPriceUSDHolder = $('#modelPriceUSD');
+    const modelSpecsHolder = $('#modelSpecs');
+    const modelPriceHolder = $('#modelPrice');
+    const modelPriceUSDHolder = $('#modelPriceUSD');
 
-    modelSpecs = '';
-    modelPrice = 0;
-
-    // Changes in the form and update price and specifications
+    // Event listeners
     $('#autoForm input').on('change', function() {
         completeSpecs();
         calcPrice();
         calcUSD();
     });
 
-    // Call to display default values
-    completeSpecs();
-    calcPrice();
-    calcUSD();
-
     // Click on color selection and update image
     $('#colorsSelector .colorItem').on('click', function() {
-        var imgPath = $(this).attr('data-img-path');
+        const imgPath = $(this).attr('data-img-path');
         $('#imgHolder img').attr('src', imgPath);
     });
 
@@ -41,6 +32,23 @@ $(document).ready(function() {
     $( "#button" ).on( "click", function() {
         alert( "Your order is purchase successful." );
     } );
+
+    // Call to display default values
+    completeSpecs();
+    calcPrice();
+    calcUSD();
+
+    // Fetch exchange rate from API
+    const currencyUrl = 'https://v6.exchangerate-api.com/v6/47620c96b5dc53f3680ed238/latest/USD';
+    
+    $.ajax({
+        url: currencyUrl,
+        cache: false,
+        success: function(response) {
+        sekUsdRate = response.conversion_rates.SEK;
+        calcUSD();
+        }
+    });
 
     // Function to calculate the price based on selected options
     function calcPrice() {
@@ -62,38 +70,16 @@ $(document).ready(function() {
         let transText = $('input[name=transmission]:checked + label', '#autoForm').text() || '';
         let packageText = $('input[name=package]:checked + label', '#autoForm').text() || '';
 
-        modelSpecs = motorText;
-        modelSpecs += motorText && transText ? ', ' + transText : transText;
-        modelSpecs += motorText || transText ? ' ' + packageText : packageText;
+        modelSpecs = [motorText, transText, packageText].filter(Boolean).join(', ');
         modelSpecsHolder.text(modelSpecs);
     }
 
     // Function to add spaces between each thousands
     function addSpace(nStr) {
-        nStr += '';
-        let x = nStr.split('.');
-        let x1 = x[0];
-        let x2 = x.length > 1 ? '.' + x[1] : '';
-        let rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ' ' + '$2');
-        }
-        return x1 + x2;
+        return nStr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
 
-    // API key and URL to retrieve exchange rate
-    let currencyUrl = 'https://v6.exchangerate-api.com/v6/47620c96b5dc53f3680ed238/latest/USD';
-    var sekUsdRate = 0;
-
-    // Get exchange rate from API
-    $.ajax({
-        url: currencyUrl,
-        cache: false,
-        success: function(response) {
-        sekUsdRate = response.conversion_rates.SEK;
-        calcUSD();
-        }
-    });
+    
 
     // Function to convert price from SEK to USD and update the HTML element
     function calcUSD() {
@@ -102,13 +88,29 @@ $(document).ready(function() {
     }
 });
 
-// Explanation:
-// 1. Variables: Declare variables to store the model's specifications and price, as well as references to HTML elements where these should be displayed.
-// 2. Form handling: Listens for changes in the form fields and updates price and specifications when the user makes a selection.
-// 3. calcPrice function: Calculates the total price based on the user's selection and updates the price HTML element.
-// 4. completeSpecs function: Collects and compiles specs based on the user's selection and updates the HTML element for the specs.
-// 5. addSpace function: Formats a number by adding spaces between each thousands.
-// 6. Exchange rate API: Get current exchange rate from an API and update the exchange rate (secUsdRate).
-// 7. calcUSD function: Converts the price from SEK to USD and updates the HTML element for the price in USD.
 
-  
+// 1. Variabler och HTML-element:
+    // Variabler: modelSpecs, modelPrice, sekUsdRate för att hålla specifikationer, pris och växelkurs.
+    // HTML-element: modelSpecsHolder, modelPriceHolder, modelPriceUSDHolder refererar till elementen där dessa värden visas.
+
+// 2. Eventlyssnare:
+    // Formulärändringar: När användaren ändrar val i formuläret (#autoForm input), uppdateras specifikationer, pris i SEK och USD.
+    // Färgändring: Klick på en färgändring (#colorsSelector .colorItem) uppdaterar bilens bild.
+    // Beställningsknapp: Klick på knappen (#button) visar ett bekräftelsemeddelande.
+
+// 3. Initial Uppdatering:
+    // Vid sidladdning anropas updateSpecs(), updatePrice(), och updateUSD() för att visa standardvärden.
+
+// 4. API-anrop för Växelkurs:
+    // Ett AJAX-anrop hämtar växelkursen SEK till USD och lagrar det i sekUsdRate.
+
+// 5. Funktioner:
+    // updatePrice: Beräknar och uppdaterar priset i SEK baserat på valda alternativ.
+    // updateSpecs: Uppdaterar och visar valda bilspecifikationer.
+    // formatPrice: Formaterar priset med mellanslag mellan tusental.
+    // updateUSD: Konverterar priset från SEK till USD och uppdaterar det i HTML.
+
+    // Sammanfattning
+    // Detta skript gör det möjligt för användare att konfigurera en bil på en webbsida
+    // genom att välja olika alternativ och se specifikationer och priser uppdateras i realtid.
+    // Det inkluderar hantering av användarval, prisberäkning, valutakonvertering och visning av valda specifikationer.
