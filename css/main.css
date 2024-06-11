@@ -1,0 +1,17 @@
+body {
+    background-color: rgba(56, 103, 119, 0.7);
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.brand {
+    width: 25%;
+}
+.bg {
+display: flex;
+
+}
