@@ -60,3 +60,38 @@ h2 {
 img {
     width: 80%;
 }
+
+.select {
+    max-width: 800px;
+    border: 8px solid #88fffb30;
+    border-radius: 30px;
+    padding-left: 50px;
+}
+
+.row {
+    display: flex;
+    justify-content: start;
+    gap: 60px;
+}
+
+.radio {
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+.colors h4 {
+    margin-left: 20px;
+}
+
+.button {
+    border: 2px solid #74c4b800;
+}
+
+.button:hover {
+    border: 2px solid #74c4b8;
+}
+
+.colorsSelector {
+    display: flex;
+    flex-wrap: wrap;
+}
