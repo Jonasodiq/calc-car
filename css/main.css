@@ -95,3 +95,45 @@ img {
     display: flex;
     flex-wrap: wrap;
 }
+
+.colorItem {
+    height: 40px;
+    width: 40px;
+    margin: 10px;
+    background-color: red;
+    border: 2px solid #bbbbbb00;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    bottom: 40px;
+}
+.colorItem:hover {
+    border: 2px solid #74c4b8;
+}
+
+.colorBlack {
+    background-color: black;
+}
+.colorBlue {
+    background-color: rgb(0, 0, 180);
+}
+.colorDenim {
+    background-color: #465563;
+}
+.colorGrey {
+    background-color: rgb(97, 97, 97);
+}
+.colorRed {
+    background-color: rgb(190, 66, 66);
+}
+.colorSilver {
+    background-color: silver;
+}
+.colorWhite {
+    background-color: white;
+}
+
+.car__footer {
+    margin: 20px;
+    text-align: center;
+}
