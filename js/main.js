@@ -94,5 +94,21 @@ $(document).ready(function() {
         calcUSD();
         }
     });
+
+    // Function to convert price from SEK to USD and update the HTML element
+    function calcUSD() {
+        let modelPriceUSD = modelPrice / sekUsdRate;
+        modelPriceUSDHolder.text('USD: ' + addSpace(modelPriceUSD.toFixed(0))); // Pris i USD
+    }
 });
+
+// Explanation:
+// 1. Variables: Declare variables to store the model's specifications and price, as well as references to HTML elements where these should be displayed.
+// 2. Form handling: Listens for changes in the form fields and updates price and specifications when the user makes a selection.
+// 3. calcPrice function: Calculates the total price based on the user's selection and updates the price HTML element.
+// 4. completeSpecs function: Collects and compiles specs based on the user's selection and updates the HTML element for the specs.
+// 5. addSpace function: Formats a number by adding spaces between each thousands.
+// 6. Exchange rate API: Get current exchange rate from an API and update the exchange rate (secUsdRate).
+// 7. calcUSD function: Converts the price from SEK to USD and updates the HTML element for the price in USD.
+
   
